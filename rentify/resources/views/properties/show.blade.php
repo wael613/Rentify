@@ -277,10 +277,17 @@
                         
                        <div class="container mt-4">
                         <div>
+                          
+                           <img src="/image/{{ $property->image }}" alt="" class="img-fluid">
+                        </div><br>
+                        
+                        <div>
                           <p class="card-description">Name: </p>
                            {{ $property->name }}
                         </div><br>
+
                         <div>
+
                           <p class="card-description">Address:</p>
                           {{ $property->address }}
                         </div><br>
@@ -313,6 +320,19 @@
                           <p class="card-description">Bathrooms</p>
                              {{ $property->baths }} Bathrooms
                         </div><br>
+                        @role('admin')
+                        <form class="forms-sample" method="POST" action="{{ route('properties.approve', $property->id) }}">
+                          @csrf
+                          <button type="submit" class="btn btn-gradient-primary me-2">Approve</button>
+                          
+                        </form>
+                        
+
+                        <form class="forms-sample" method="POST" action="{{ route('properties.decline', $property->id) }}">
+                          @csrf
+                          <button type="submit" class="btn btn-gradient-danger">Decline</button>
+                        </form>
+                        @endrole
 
                         
                       

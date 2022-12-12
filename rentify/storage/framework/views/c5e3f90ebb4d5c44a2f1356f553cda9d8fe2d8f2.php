@@ -17,6 +17,14 @@
         </div>
 
         <div class="form-group form-floating mb-3">
+            <input type="text" class="form-control" name="name" value="<?php echo e(old('name')); ?>" placeholder="name" required="required" autofocus>
+            <label for="floatingName">Name</label>
+            <?php if($errors->has('name')): ?>
+                <span class="text-danger text-left"><?php echo e($errors->first('name')); ?></span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form-group form-floating mb-3">
             <input type="text" class="form-control" name="username" value="<?php echo e(old('username')); ?>" placeholder="Username" required="required" autofocus>
             <label for="floatingName">Username</label>
             <?php if($errors->has('username')): ?>
@@ -39,6 +47,8 @@
                 <span class="text-danger text-left"><?php echo e($errors->first('password')); ?></span>
             <?php endif; ?>
         </div>
+
+        <input type="hidden" id="role" name="rl" value="1">
 
         <div class="form-group form-floating mb-3">
             <input type="password" class="form-control" name="password_confirmation" value="<?php echo e(old('password_confirmation')); ?>" placeholder="Confirm Password" required="required">

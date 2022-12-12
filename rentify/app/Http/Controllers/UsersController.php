@@ -96,7 +96,7 @@ class UsersController extends Controller
 
         $user->syncRoles($request->get('role'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('home.dashboard')
             ->withSuccess(__('User updated successfully.'));
     }
 
@@ -113,5 +113,11 @@ class UsersController extends Controller
 
         return redirect()->route('users.index')
             ->withSuccess(__('User deleted successfully.'));
+    }
+
+    public function tenants(){
+        $users = User::latest()->paginate(10);
+
+        return view('tenants', compact('users'));
     }
 }

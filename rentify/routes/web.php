@@ -9,6 +9,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\UploadImageController;
 
 
 /*
@@ -46,6 +47,7 @@ Route::group(['middleware' => ['guest']], function() {
      * Register Routes
      */
     Route::get('/register', [RegisterController::class,'show'])->name('register.show');
+    Route::get('/register-tenant', [RegisterController::class,'showTenant'])->name('register.showTenant');
     Route::post('/register', [RegisterController::class,'register'])->name('register.perform');
 
     /**
@@ -84,6 +86,8 @@ Route::group(['middleware' => ['auth','permission']], function() {
         Route::get('/{property}/edit', [PropertyController::class,'edit'])->name('properties.edit');
         Route::patch('/{property}/update', [PropertyController::class,'update'])->name('properties.update');
         Route::delete('/{property}/delete', [PropertyController::class,'destroy'])->name('properties.destroy');
+        Route::post('/{property}/approve', [PropertyController::class,'approve'])->name('properties.approve');
+        Route::post('/{property}/decline', [PropertyController::class,'decline'])->name('properties.decline');
     });
 
     Route::resource('roles', RolesController::class);
@@ -91,3 +95,13 @@ Route::group(['middleware' => ['auth','permission']], function() {
 
 
 });
+
+
+
+Route::get('/find-rental', [PropertyController::class, 'properties']);
+Route::get('/details/{property}',[PropertyController::class,'details']);
+
+Route::get('/search',[PropertyController::class,'search']);
+Route::get('/filter',[PropertyController::class,'filter']);
+
+Route::get('/tenants', [UsersController::class, 'tenants']);

@@ -30,7 +30,9 @@ return new class extends Migration
             $table->string('options');
             $table->enum('status',['pending','validated','rejected'])->default('pending');
             $table->timestamps();
+            $table->string('image');
             $table->foreignId("user_id")->constraint("users")->onDelete("cascade");
+            
         });
     }
 

@@ -23,7 +23,14 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'phone'
+        'phone',
+        'rl',
+        'career',
+        'pet',
+        'guests',
+        'shareBelongings',
+        'smoker',
+        'passion'
     ];
 
     public function setPasswordAttribute($value)
@@ -49,4 +56,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+  
+    public function setPassionAttribute($value)
+    {
+        $this->attributes['passion'] = json_encode($value);
+    }
+
+    public function getPassionAttribute($value)
+    {
+        return $this->attributes['passion'] = json_decode($value);
+    }
 }

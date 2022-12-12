@@ -42,4 +42,5 @@
     
 
 </body>
-</html><?php /**PATH E:\school\L3DSI\Projet-Integration\projet-l3dsi\rentify\resources\views/layouts/auth-master.blade.php ENDPATH**/ ?>
+</html>
+<?php /**PATH E:\school\L3DSI\Projet-Integration\projet-l3dsi\rentify\resources\views/layouts/auth-master.blade.php ENDPATH**/ ?>

@@ -296,7 +296,11 @@
                             @if ($errors->has('phone'))
                             <span class="text-danger text-left">{{ $errors->first('phone') }}</span>
                         @endif
+
+
+                        @role('admin')
                           </div class="form-group">
+
                           <label for="role">Role</label>
                           <select class="form-control" 
                             name="role" required>
@@ -312,6 +316,31 @@
                             <span class="text-danger text-left">{{ $errors->first('role') }}</span>
                         @endif
                           <div>
+                        @endrole
+
+                        @role('landlord')
+                          <label  for="role">Role</label>
+                          <select class="form-control" 
+                            name="role" required>
+                                <option value="2"
+                                    >landlord</option>
+                        </select>
+                        @if ($errors->has('role'))
+                            <span class="text-danger text-left">{{ $errors->first('role') }}</span>
+                        @endif
+                        @endrole
+                        @role('tenant')
+                          <label for="role">Role</label>
+                          <select class="form-control" 
+                            name="role" required>
+                                <option value="3"
+                                    >tenant</option>
+                        </select>
+                        @if ($errors->has('role'))
+                            <span class="text-danger text-left">{{ $errors->first('role') }}</span>
+                        @endif
+                        @endrole
+
 
                           </div>
                         {{-- <div class="form-group">

@@ -275,11 +275,18 @@
                         
                        <div class="container mt-4">
                         <div>
+                          
+                           <img src="/image/<?php echo e($property->image); ?>" alt="" class="img-fluid">
+                        </div><br>
+                        
+                        <div>
                           <p class="card-description">Name: </p>
                            <?php echo e($property->name); ?>
 
                         </div><br>
+
                         <div>
+
                           <p class="card-description">Address:</p>
                           <?php echo e($property->address); ?>
 
@@ -320,6 +327,19 @@
                           <p class="card-description">Bathrooms</p>
                              <?php echo e($property->baths); ?> Bathrooms
                         </div><br>
+                        <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'admin')): ?>
+                        <form class="forms-sample" method="POST" action="<?php echo e(route('properties.approve', $property->id)); ?>">
+                          <?php echo csrf_field(); ?>
+                          <button type="submit" class="btn btn-gradient-primary me-2">Approve</button>
+                          
+                        </form>
+                        
+
+                        <form class="forms-sample" method="POST" action="<?php echo e(route('properties.decline', $property->id)); ?>">
+                          <?php echo csrf_field(); ?>
+                          <button type="submit" class="btn btn-gradient-danger">Decline</button>
+                        </form>
+                        <?php endif; ?>
 
                         
                       

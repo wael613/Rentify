@@ -18,6 +18,11 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+    public function showTenant()
+    {
+        return view('auth.register-tenant');
+    }
+
     /**
      * Handle account registration request
      * 
@@ -29,7 +34,12 @@ class RegisterController extends Controller
     {
         $user = User::create($request->validated());
 
-        $user->syncRoles('landlord');
+        if($user->rl==1){
+            $user->syncRoles('landlord');
+        }  
+        if($user->rl==2){
+            $user->syncRoles('tenant');
+        }
 
         auth()->login($user);
 

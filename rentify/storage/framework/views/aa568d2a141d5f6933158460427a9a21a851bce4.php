@@ -290,6 +290,7 @@
                             Phone Number: <?php echo e($user->phone); ?>
 
                         </div>
+                        
                     </div>
                             
                       </div>

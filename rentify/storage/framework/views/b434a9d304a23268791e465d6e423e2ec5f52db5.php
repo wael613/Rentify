@@ -253,13 +253,14 @@
         </nav>
         
         <!-- partial -->
+        <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                   <i class="mdi mdi-home"></i>
-                </span> Add Property
+                </span> Edit Property
               </h3>
             </div>
 
@@ -267,7 +268,7 @@
                 <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <h4 class="card-title">Add new Property</h4>
+                      <h4 class="card-title">Edit Property</h4>
                       <p class="card-description"> Fill in the form </p>
                       <form class="forms-sample" method="post" action="<?php echo e(route('properties.update', $property->id)); ?>">
                         <?php echo method_field('patch'); ?>
@@ -409,6 +410,11 @@
                         <label class="form-check-label">
                           <input type="checkbox" class="form-check-input" name="options[]" value="ac" > AC</label>
                       
+                        </div>
+                        <div>
+                        <label class="form-check-label">
+                        <input type="file" name="image" class="uk-input" id="image" placeholder="xxx">
+                        <img src="/image/<?php echo e($property->image); ?>" width="300px">
                         </div>
 
                         

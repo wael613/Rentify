@@ -299,7 +299,11 @@
                             <?php if($errors->has('phone')): ?>
                             <span class="text-danger text-left"><?php echo e($errors->first('phone')); ?></span>
                         <?php endif; ?>
+
+
+                        <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'admin')): ?>
                           </div class="form-group">
+
                           <label for="role">Role</label>
                           <select class="form-control" 
                             name="role" required>
@@ -315,6 +319,31 @@
                             <span class="text-danger text-left"><?php echo e($errors->first('role')); ?></span>
                         <?php endif; ?>
                           <div>
+                        <?php endif; ?>
+
+                        <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'landlord')): ?>
+                          <label  for="role">Role</label>
+                          <select class="form-control" 
+                            name="role" required>
+                                <option value="2"
+                                    >landlord</option>
+                        </select>
+                        <?php if($errors->has('role')): ?>
+                            <span class="text-danger text-left"><?php echo e($errors->first('role')); ?></span>
+                        <?php endif; ?>
+                        <?php endif; ?>
+                        <?php if(\Spatie\Permission\PermissionServiceProvider::bladeMethodWrapper('hasRole', 'tenant')): ?>
+                          <label for="role">Role</label>
+                          <select class="form-control" 
+                            name="role" required>
+                                <option value="3"
+                                    >tenant</option>
+                        </select>
+                        <?php if($errors->has('role')): ?>
+                            <span class="text-danger text-left"><?php echo e($errors->first('role')); ?></span>
+                        <?php endif; ?>
+                        <?php endif; ?>
+
 
                           </div>
                         

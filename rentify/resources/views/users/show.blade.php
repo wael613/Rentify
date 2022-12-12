@@ -288,6 +288,7 @@
                         <div>
                             Phone Number: {{ $user->phone }}
                         </div>
+                        
                     </div>
                             
                       </div>

@@ -95,6 +95,48 @@ class PropertyController extends Controller
             'availability' => 'required|date_format:Y-m-d',
             'rooms' => 'required',
             'baths' => 'required',
+            'options' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $input = $request->all();
+        // $input['options'] = $request->input('options');
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
+
+        
+
+
+        Property::create(array_merge($input,[
+            'user_id' => auth()->id()
+        ]));
+
+        // Property::create(array_merge($request->only('name','address', 'city', 'monthlyCost', 'description' ,'propertyType', 'furnishType ','letType','availability' ,'rooms' ,'baths','options'),[
+        //     'user_id' => auth()->id()
+        // ]));
+
+        return redirect()->route('properties.index')
+            ->withSuccess(__('Property created successfully.'));
+    }
+
+    public function storeOrigin(Request $request){
+        
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'monthlyCost' => 'required',
+            'description' => 'required',
+            'propertyType' => 'required',
+            'furnishType' => 'required',
+            'letType' => 'required',
+            'availability' => 'required|date_format:Y-m-d',
+            'rooms' => 'required',
+            'baths' => 'required',
             'options' => 'required'
         ]);
         $input = $request->all();
@@ -168,6 +210,15 @@ class PropertyController extends Controller
 
         $input = $request->all();
 
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }else{
+            unset($input['image']);
+        }
+
         $property->update($input);
 
         return redirect()->route('properties.index')
@@ -187,4 +238,66 @@ class PropertyController extends Controller
         return redirect()->route('properties.index')
             ->withSuccess(__('Property deleted successfully.'));
     }
+
+    public function approve(Property $property){
+
+        //$property->status = 'validated';
+        //$property->update(['status' => 'validated']);
+
+        $property->status = 'validated';
+ 
+        $property->save();
+
+        return redirect()->route('properties.index')
+            ->withSuccess(__('Property approved'));
+    }
+
+    public function decline(Property $property){
+
+        //$property->status = 'validated';
+        //$property->update(['status' => 'validated']);
+
+        $property->delete();
+
+        return redirect()->route('properties.index')
+            ->withSuccess(__('Property declined'));
+    }
+
+    public function properties(){
+        // $properties = Property::where('status',"validated");
+
+        $properties = Property::latest()->paginate(5);
+
+        return view('properties', compact('properties'));
+    }
+
+    public function details(Property $property){
+        return view('details', compact('property'));
+    }
+
+    public function search()
+    {
+        $search_text = $_GET['query'];
+        $properties = Property::where('name','LIKE','%'.$search_text.'%')->get();
+
+        return view('search',compact('properties'));
+    }
+
+    public function filter(Request $request)
+    {
+
+        // $type = DB::table('coworking_spaces')->select('type')->distinct()->get()->pluck('type');
+
+        $search_text = $_GET['propertyType'];
+        $properties = Property::where('propertyType','LIKE','%'.$search_text.'%')->get();
+
+        // $coworkingSpaces = CoworkingSpace::query();
+
+        // if($request->filled('type')){
+        //     $coworkingSpaces->where('type',$request->type);
+        // }
+
+        return view('filter',compact('properties'));
+    }
+    
 }

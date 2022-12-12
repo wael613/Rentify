@@ -30,7 +30,13 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email:rfc,dns|unique:users,email,'.$user->id,
             'username' => 'required|unique:users,username,'.$user->id,
-            'phone' => 'required'
+            'phone' => 'required',
+            'career'=>'nullable',
+            'pet'=>'nullable',
+            'guests' =>'nullable',
+            'shareBelongings' =>'nullable',
+            'smoker' =>'nullable',
+            'passion' =>'nullable'
         ];
     }
 }

@@ -21,8 +21,18 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone');
             $table->string('password');
+            $table->integer('rl');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('career')->nullable();
+            $table->enum('pet',['cat','dog','bird','other','none'])->nullable();
+            $table->enum('guests',['often','sometimes','never'])->nullable();
+            // 1 = yes ; 0 = no
+            $table->integer('shareBelongings')->nullable();
+            // 1 = yes ; 0 = no
+            $table->integer('smoker')->nullable();
+            $table->string('passion')->nullable();
+
         });
     }
 

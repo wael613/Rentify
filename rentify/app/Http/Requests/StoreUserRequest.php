@@ -27,7 +27,13 @@ class StoreUserRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email:rfc,dns|unique:users,email',
             'username' => 'required|unique:users,username',
-            'phone' => 'required'
+            'phone' => 'required',
+            'career'=>'nullable',
+            'pet'=>'nullable',
+            'guests' =>'nullable',
+            'shareBelongings' =>'nullable',
+            'smoker' =>'nullable',
+            'passion' =>'nullable',
         ];
     }
 }

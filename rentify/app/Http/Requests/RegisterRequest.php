@@ -28,6 +28,14 @@ class RegisterRequest extends FormRequest
             'username' => 'required|unique:users,username',
             'password' => 'required|min:8',
             'phone' => 'required',
+            'name' => 'required',
+            'rl' => 'required',
+            'career'=>'nullable',
+            'pet'=>'nullable',
+            'guests' =>'nullable',
+            'shareBelongings' =>'nullable',
+            'smoker' =>'nullable',
+            'passion' =>'nullable',
             'password_confirmation' => 'required|same:password'
         ];
     }
